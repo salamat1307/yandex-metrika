@@ -1,8 +1,8 @@
 # Yandex Metrika Laravel 5 Package
 
-[![Latest Stable Version](https://poser.pugx.org/alexusmai/yandex-metrika/v/stable)](https://packagist.org/packages/alexusmai/yandex-metrika) 
-[![Total Downloads](https://poser.pugx.org/alexusmai/yandex-metrika/downloads)](https://packagist.org/packages/alexusmai/yandex-metrika) 
-[![Latest Unstable Version](https://poser.pugx.org/alexusmai/yandex-metrika/v/unstable)](https://packagist.org/packages/alexusmai/yandex-metrika) 
+[![Latest Stable Version](https://poser.pugx.org/alexusmai/yandex-metrika/v/stable)](https://packagist.org/packages/alexusmai/yandex-metrika)
+[![Total Downloads](https://poser.pugx.org/alexusmai/yandex-metrika/downloads)](https://packagist.org/packages/alexusmai/yandex-metrika)
+[![Latest Unstable Version](https://poser.pugx.org/alexusmai/yandex-metrika/v/unstable)](https://packagist.org/packages/alexusmai/yandex-metrika)
 [![License](https://poser.pugx.org/alexusmai/yandex-metrika/license)](https://packagist.org/packages/alexusmai/yandex-metrika)
 
 Пакет предназначен для получения данных статистики Яндекс Метрики.
@@ -19,26 +19,25 @@
 
 С помощью Composer
 
-``` bash
-composer require alexusmai/yandex-metrika
+```bash
+composer require salamat/yandex-metrika
 ```
 
 Если у вас установлен Laravel 5.4 или более ранней версии, то в app/config/app.php нужно добавить провайдера,
 
-``` php
+```php
 Alexusmai\YandexMetrika\YandexMetrikaServiceProvider::class,
 ```
 
 и добавить алиас.
 
-``` php
+```php
 'YandexMetrika' => Alexusmai\YandexMetrika\YandexMetrikaFacade::class,
 ```
 
-
 Публикуем файл настроек
 
-``` php
+```php
 php artisan vendor:publish --provider="Alexusmai\YandexMetrika\YandexMetrikaServiceProvider" --tag="yandex-metrika"
 ```
 
@@ -47,23 +46,26 @@ php artisan vendor:publish --provider="Alexusmai\YandexMetrika\YandexMetrikaServ
 Метрика использует протокол OAuth, этот протокол позволяет работать с данными Яндекса от лица пользователя Яндекса через приложение, зарегистрированное на Яндексе.
 Для начала нужно зарегистрировать новое приложение, и получить token
 
-- Заходим на страницу 
+- Заходим на страницу
+
 ```
 https://oauth.yandex.ru/
 ```
+
 - Нажимаем «Зарегистрировать новое приложение»
 - Запоняем поле «Название»
 - Выбираем в разделе права пункт - Яндекс.Метрика и ставим галочку напротив пункта «Получение статистики, чтение параметров своих и доверенных счетчиков»
 - Выбираем «Подставить URL для разработки» под полем «Callback URL»
 - Сохраняем
 - Копируем ID приложения и заходим на Яндекс под той учетной записью, от имени которой будет работать приложение
-- Переходим по URL: 
+- Переходим по URL:
+
 ```
 https://oauth.yandex.ru/authorize?response_type=token&client_id=подставим сюда идентификатор приложения
 ```
+
 - Приложение запросит разрешение на доступ, нажимаем «Разрешить»
 - Заносим полученный токен в файл конфигурации пакета.
-
 
 ## Использование
 
@@ -94,6 +96,7 @@ YandexMetrika {#464 ▼
   +adaptData: null
 }
 ```
+
 Если данные не получены - null.
 Ошибки возникающие при запросе данных пишутся в лог с названием Yandex Metrika:
 
@@ -118,7 +121,7 @@ YandexMetrika::setCounter($token, $counterId, $cache)->getVisitsViewsUsers();
 
 ### Получаем кол-во: визитов, просмотров, уникальных посетителей по дням
 
-``` php
+```php
 YandexMetrika::getVisitsViewsUsers();   //По умолчанию - за последние 30 дней
 //Пример
 YandexMetrika::getVisitsViewsUsers(10); //За последние 10 дней
@@ -130,7 +133,7 @@ YandexMetrika::getVisitsViewsUsers()->adapt();
 
 ### Самые просматриваемые страницы
 
-``` php
+```php
 YandexMetrika::getTopPageViews();       //По умолчанию за последние 30 дней, количество результатов - 10
 //Пример
 YandexMetrika::getTopPageViews(10, 50); //За последние 10 дней, максимум 50 результатов
@@ -142,7 +145,7 @@ YandexMetrika::getTopPageViews()->adapt();
 
 ### Отчет "Источники - Сводка"
 
-``` php
+```php
 YandexMetrika::getSourceSummary();      //По умолчанию за последние 30 дней
 //Пример
 YandexMetrika::getSourceSummary(7);     //За последние 10 дней
@@ -154,7 +157,7 @@ YandexMetrika::getSourcesSummary()->adapt();
 
 ### Отчет "Источники - Поисковые фразы"
 
-``` php
+```php
 YandexMetrika::getSourcesSearchPhrases();       //По умолчанию за последние 30 дней, количество результатов - 10
 //Пример
 YandexMetrika::getSourcesSearchPhrases(15, 20); //За последние 15 дней, максимум 20 результатов
@@ -164,9 +167,9 @@ YandexMetrika::getSourcesSearchPhrasesForPeriod(DateTime $startDate, DateTime $e
 YandexMetrika::getSourcesSearchPhrases()->adapt();
 ```
 
-###  Отчет "Технологии - Браузеры"
+### Отчет "Технологии - Браузеры"
 
-``` php
+```php
 YandexMetrika::getTechPlatforms();      //По умолчанию за последние 30 дней, макс количество результатов - 10
 //Пример
 YandexMetrika::getTechPlatforms(12, 5); //За последние 12 дней, максимум 5 результатов
@@ -178,7 +181,7 @@ YandexMetrika::getTechPlatforms()->adapt();
 
 ### Количество визитов и посетителей с учетом поисковых систем
 
-``` php
+```php
 YandexMetrika::getVisitsUsersSearchEngine();    //По умолчанию за последние 30 дней, макс количество результатов - 10
 //Пример
 YandexMetrika::getVisitsUsersSearchEngine(24, 60);  //За последние 24 дня, максимум 60 результатов
@@ -190,7 +193,7 @@ YandexMetrika::getVisitsUsersSearchEngine()->adapt();
 
 ### Количество визитов с заданной глубиной просмотра
 
-``` php
+```php
 YandexMetrika::getVisitsViewsPageDepth();       //По умолчанию за последние 30 дней, количество просмотренных страниц - 5
 //Пример
 YandexMetrika::getVisitsViewsPageDepth(14, 30);   //За последние 14 дней, макс количество результатов - 30
@@ -202,7 +205,7 @@ YandexMetrika::getVisitsViewsPageDepth()->adapt();
 
 ### Отчеты о посещаемости сайта с распределением по странам и регионам
 
-``` php
+```php
 YandexMetrika::getGeoCountry();   //По умолчанию за последние 7 дней, макс количество результатов - 100
 //Пример
 YandexMetrika::getGeoCountry(12, 30);   //За последние 12 дней, макс количество результатов - 30
@@ -214,7 +217,7 @@ YandexMetrika::getGeoCountry()->adapt()();
 
 ### Отчеты о посещаемости сайта с распределением по областям и городам
 
-``` php
+```php
 YandexMetrika::getGeoArea();   //По умолчанию за последние 7 дней, макс количество результатов - 100, Страна - Россия (id-225)
 //Пример
 YandexMetrika::getGeoArea(12, 30, 187);   //За последние 12 дней, макс количество результатов - 30, страна - Украина
@@ -228,7 +231,7 @@ YandexMetrika::getGeoArea()->adapt()();
 
 ### Произвольный запрос к Api Yandex Metrika
 
-``` php
+```php
 //Параметры запроса
 $urlParams = [
             'ids'           => '123456',                        //id счетчика
