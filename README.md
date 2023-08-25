@@ -26,19 +26,19 @@ composer require salamat/yandex-metrika
 Если у вас установлен Laravel 5.4 или более ранней версии, то в app/config/app.php нужно добавить провайдера,
 
 ```php
-Alexusmai\YandexMetrika\YandexMetrikaServiceProvider::class,
+Salamat\YandexMetrika\YandexMetrikaServiceProvider::class,
 ```
 
 и добавить алиас.
 
 ```php
-'YandexMetrika' => Alexusmai\YandexMetrika\YandexMetrikaFacade::class,
+'YandexMetrika' => Salamat\YandexMetrika\YandexMetrikaFacade::class,
 ```
 
 Публикуем файл настроек
 
 ```php
-php artisan vendor:publish --provider="Alexusmai\YandexMetrika\YandexMetrikaServiceProvider" --tag="yandex-metrika"
+php artisan vendor:publish --provider="Salamat\YandexMetrika\YandexMetrikaServiceProvider" --tag="yandex-metrika"
 ```
 
 ## Настройка
