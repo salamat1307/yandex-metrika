@@ -20,6 +20,7 @@
       "Salamat\\YandexMetrika\\": "src"
     }
   },
+  "minimum-stability":"dev",
   "extra": {
     "laravel": {
       "providers": [
